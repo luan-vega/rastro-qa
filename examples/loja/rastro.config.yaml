@@ -1,0 +1,55 @@
+# Projeto de demonstração: tudo aponta para o servidor simulado em mock/server.mjs
+project: loja-demo
+defaultEnv: hml
+allowedEnvs: [hml]
+
+correlation:
+  header: x-correlation-id
+  prefix: rst
+  injectInto: [ui, api]
+
+approval:
+  required: true
+
+massa:
+  file: massa/hml.yaml
+
+envs:
+  hml:
+    baseUrl: http://127.0.0.1:4010
+    apiHosts: ["127.0.0.1:4010"]
+    sessions:
+      hml-cliente:
+        mode: storageState
+        file: .rastro/auth/hml-cliente.json
+        maxAgeHours: 8
+        loginUrl: http://127.0.0.1:4010/login
+    api:
+      bruno: { env: local }
+    logs:
+      cloudwatch:
+        region: sa-east-1
+        endpoint: http://127.0.0.1:4010      # CloudWatch simulado
+        logGroups: [/ecs/checkout-api]
+        ingestionWaitSec: 10
+    datadog:
+      site: datadoghq.com
+      apiBase: http://127.0.0.1:4010          # Datadog simulado
+      apiKey: "{{secret:DD_API_KEY}}"
+      appKey: "{{secret:DD_APP_KEY}}"
+      env: hml
+    jmeter:
+      host: 127.0.0.1
+      port: 4010
+      protocol: http
+
+ai:
+  provider: none                 # na demo as queries estão escritas no cenário
+
+perf:
+  jmeter:
+    defaults: { threads: 5, rampSec: 2, durationSec: 15 }
+
+evidence:
+  dir: evidence
+  formats: [pdf, md, junit]

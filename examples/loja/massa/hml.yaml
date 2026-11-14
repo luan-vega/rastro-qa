@@ -1,0 +1,6 @@
+# Dados fictícios
+cliente_pf:
+  nome: Maria Teste Silva
+  cpf: "138.978.270-00"
+carga:
+  - { cpf: "736.206.986-35", nome: Joao Teste }

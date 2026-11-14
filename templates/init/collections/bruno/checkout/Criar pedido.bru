@@ -1,0 +1,27 @@
+meta {
+  name: Criar pedido
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseApi}}/api/checkout
+  body: json
+  auth: bearer
+}
+
+headers {
+  x-correlation-id: {{correlationId}}
+}
+
+auth:bearer {
+  token: {{accessToken}}
+}
+
+body:json {
+  {
+    "cartId": "{{cartId}}",
+    "discountCode": "{{discountCode}}",
+    "cpf": "{{cpf}}"
+  }
+}

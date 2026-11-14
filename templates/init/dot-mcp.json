@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "rastro": {
+      "command": "npx",
+      "args": ["-y", "rastro-qa", "mcp"],
+      "env": {
+        "AWS_PROFILE": "hml",
+        "DD_API_KEY": "${DD_API_KEY}",
+        "DD_APP_KEY": "${DD_APP_KEY}",
+        "ANTHROPIC_API_KEY": "${ANTHROPIC_API_KEY}"
+      }
+    }
+  }
+}

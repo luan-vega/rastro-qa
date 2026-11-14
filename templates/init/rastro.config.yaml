@@ -1,0 +1,56 @@
+project: minha-api
+defaultEnv: hml                  # homologação é o ambiente principal
+allowedEnvs: [hml]               # outros ambientes só com --env explícito
+
+correlation:
+  header: x-correlation-id       # o backend precisa gravar este header nos logs
+  prefix: rst
+  injectInto: [ui, api]
+
+approval:
+  required: true                 # cenário sem aprovação não executa
+  approvers: []                  # vazio = qualquer pessoa pode aprovar
+
+massa:
+  file: massa/hml.yaml           # preenchido pelo usuário, nunca pela IA
+
+envs:
+  hml:
+    baseUrl: https://hml.exemplo.com.br
+    apiHosts: [api-hml.exemplo.com.br]
+    sessions:
+      hml-cliente:
+        mode: storageState       # capture com: rastro auth capture hml-cliente
+        file: .rastro/auth/hml-cliente.json
+        maxAgeHours: 8
+        loginUrl: https://hml.exemplo.com.br/login
+    api:
+      bruno: { env: hml }
+    logs:
+      cloudwatch:
+        region: sa-east-1
+        profile: qa-readonly     # IAM só com logs:StartQuery, GetQueryResults, StopQuery
+        logGroups: [/ecs/checkout-api]
+        ingestionWaitSec: 90
+    datadog:
+      site: datadoghq.com
+      apiKey: "{{secret:DD_API_KEY}}"
+      appKey: "{{secret:DD_APP_KEY}}"
+      env: hml
+    jmeter:
+      host: api-hml.exemplo.com.br
+      protocol: https
+
+ai:
+  provider: anthropic            # anthropic | none
+  model: claude-opus-5-5
+  effort: medium
+
+perf:
+  jmeter:
+    home: /opt/apache-jmeter
+    defaults: { threads: 10, rampSec: 30, durationSec: 300 }
+
+evidence:
+  dir: evidence
+  formats: [pdf, md, junit]
