@@ -1,0 +1,11 @@
+# Só dados fictícios. Use um gerador de CPF/CNPJ para testes.
+# "rastro massa" confere os dígitos verificadores.
+cliente_pf:
+  nome: Maria Teste Silva
+  cpf: "138.978.270-00"
+  email: maria.teste@exemplo.com
+cliente_pj:
+  razaoSocial: Loja Teste Ltda
+  cnpj: "64.337.289/0001-11"
+carga:                            # linhas extras para o CSV do JMeter
+  - { cpf: "736.206.986-35", nome: Joao Teste }

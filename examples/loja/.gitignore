@@ -1,0 +1,4 @@
+evidence/
+.rastro/auth/
+.rastro/approvals.json
+perf/baselines/

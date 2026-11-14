@@ -1,0 +1,4 @@
+evidence/
+.rastro/auth/
+perf/jmeter/*.properties
+.env

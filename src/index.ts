@@ -1,0 +1,10 @@
+export { loadProject } from "./core/config.js";
+export { loadScenario, findScenarioFiles } from "./core/scenario.js";
+export { runScenarioFile, runScenarios, type RunResult } from "./core/runner.js";
+export { cpfValido, cnpjValido } from "./core/documentos.js";
+export { setQueryGenerator } from "./ai/resolve.js";
+export type { QueryGenerator, QueryRequest, QuerySpec } from "./ai/types.js";
+export type { StepPlugin, StepResult } from "./core/types.js";
+export * as api from "./api.js";
+export { buildMcpServer, INSTRUCTIONS as MCP_INSTRUCTIONS } from "./mcp/server.js";
+export { SetupError, TimeoutError, EXIT, type ErrorCode } from "./core/errors.js";

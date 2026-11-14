@@ -1,0 +1,29 @@
+meta {
+  name: Criar pedido
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseApi}}/api/checkout
+  body: json
+  auth: none
+}
+
+headers {
+  x-correlation-id: {{correlationId}}
+}
+
+body:json {
+  {
+    "cartId": "{{cartId}}",
+    "discountCode": "{{discountCode}}",
+    "cpf": "{{cpf}}"
+  }
+}
+
+tests {
+  test("status 201", function() {
+    expect(res.getStatus()).to.equal(201);
+  });
+}
